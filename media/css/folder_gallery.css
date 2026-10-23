@@ -1,0 +1,348 @@
+/* mod_folder_gallery - (C) Pixed - pixed.it */
+
+.folder-gallery {
+	max-width: 100%;
+	min-width: 0;
+	--fg-cols: 4;
+	--fg-gap: 0.75rem;
+	--fg-radius: 10px;
+	--fg-border: rgba(0, 0, 0, 0.1);
+	--fg-surface: rgba(0, 0, 0, 0.03);
+	--fg-surface-hover: rgba(0, 0, 0, 0.07);
+	--fg-accent: currentColor;
+	--fg-text: inherit;
+}
+
+/* Breadcrumb */
+.folder-gallery .fg-breadcrumb {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.35rem;
+	margin-bottom: 1rem;
+	font-size: 0.95rem;
+}
+
+.folder-gallery .fg-crumb {
+	background: none;
+	border: 0;
+	padding: 0.15rem 0.25rem;
+	color: var(--fg-text);
+	cursor: pointer;
+	font: inherit;
+	opacity: 0.75;
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+.folder-gallery .fg-crumb:hover,
+.folder-gallery .fg-crumb:focus-visible {
+	opacity: 1;
+}
+
+.folder-gallery .fg-crumb:last-child {
+	opacity: 1;
+	text-decoration: none;
+	font-weight: 600;
+	cursor: default;
+}
+
+.folder-gallery .fg-crumb-sep {
+	opacity: 0.4;
+}
+
+/* Folder cards */
+.folder-gallery .fg-folders {
+	display: grid;
+	grid-template-columns: repeat(var(--fg-cols), 1fr);
+	gap: var(--fg-gap);
+	margin-bottom: 1.25rem;
+}
+
+.folder-gallery .fg-folder {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	width: 100%;
+	min-width: 0;
+	padding: 0.85rem 1rem;
+	border: 1px solid var(--fg-border);
+	border-radius: var(--fg-radius);
+	background: var(--fg-surface);
+	color: var(--fg-text);
+	cursor: pointer;
+	font: inherit;
+	text-align: left;
+	transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.folder-gallery .fg-folder:hover,
+.folder-gallery .fg-folder:focus-visible {
+	background: var(--fg-surface-hover);
+}
+
+.folder-gallery .fg-folder-icon {
+	flex: 0 0 auto;
+	display: inline-flex;
+	opacity: 0.7;
+}
+
+.folder-gallery .fg-folder-name {
+	flex: 1 1 auto;
+	overflow-wrap: anywhere;
+	line-height: 1.3;
+	font-weight: 600;
+}
+
+.folder-gallery .fg-folder-count {
+	flex: 0 0 auto;
+	font-size: 0.8rem;
+	opacity: 0.6;
+	padding: 0.1rem 0.45rem;
+	border-radius: 999px;
+	background: var(--fg-surface-hover);
+}
+
+/* Back button (shown inside sub-folders, before and after the content) */
+.folder-gallery .fg-back {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.3rem;
+	padding: 0.4rem 0.9rem 0.4rem 0.55rem;
+	border: 1px solid var(--fg-border);
+	border-radius: 999px;
+	background: var(--fg-surface);
+	color: var(--fg-text);
+	cursor: pointer;
+	font: inherit;
+	transition: background-color 0.15s ease;
+}
+
+.folder-gallery .fg-back:hover,
+.folder-gallery .fg-back:focus-visible {
+	background: var(--fg-surface-hover);
+}
+
+.folder-gallery .fg-back-icon {
+	display: inline-flex;
+	opacity: 0.8;
+}
+
+.folder-gallery .fg-back--top {
+	margin-bottom: 1rem;
+}
+
+.folder-gallery .fg-back--bottom {
+	margin-top: 1.25rem;
+}
+
+/* Image grid */
+.folder-gallery .fg-grid {
+	display: grid;
+	grid-template-columns: repeat(var(--fg-cols), 1fr);
+	gap: var(--fg-gap);
+}
+
+.folder-gallery .fg-thumb {
+	display: block;
+	padding: 0;
+	border: 0;
+	border-radius: var(--fg-radius);
+	overflow: hidden;
+	cursor: pointer;
+	background: var(--fg-surface);
+	aspect-ratio: 1 / 1;
+	line-height: 0;
+}
+
+.folder-gallery .fg-thumb img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	transition: transform 0.25s ease;
+}
+
+.folder-gallery .fg-thumb:hover img,
+.folder-gallery .fg-thumb:focus-visible img {
+	transform: scale(1.05);
+}
+
+/* Load more */
+.folder-gallery .fg-loadmore-wrap {
+	text-align: center;
+	margin-top: 1.25rem;
+}
+
+.folder-gallery .fg-loadmore {
+	border: 1px solid var(--fg-border);
+	border-radius: 999px;
+	background: var(--fg-surface);
+	color: var(--fg-text);
+	padding: 0.5rem 1.5rem;
+	cursor: pointer;
+	font: inherit;
+}
+
+.folder-gallery .fg-loadmore:hover,
+.folder-gallery .fg-loadmore:focus-visible {
+	background: var(--fg-surface-hover);
+}
+
+.folder-gallery .fg-loadmore.is-loading {
+	cursor: default;
+	opacity: 0.85;
+}
+
+/* Spinner (load-more button + loading message) */
+.folder-gallery .fg-spinner,
+.folder-gallery .fg-loadmore.is-loading::before {
+	content: "";
+	display: inline-block;
+	width: 1.05em;
+	height: 1.05em;
+	margin-right: 0.5em;
+	vertical-align: -0.18em;
+	border: 2px solid currentColor;
+	border-top-color: transparent;
+	border-radius: 50%;
+	animation: fg-spin 0.6s linear infinite;
+}
+
+@keyframes fg-spin {
+	to { transform: rotate(360deg); }
+}
+
+.folder-gallery .fg-message--loading {
+	display: flex;
+	align-items: center;
+}
+
+/* Messages */
+.folder-gallery .fg-message {
+	opacity: 0.7;
+	padding: 1rem 0;
+}
+
+.folder-gallery .fg-message--error {
+	color: #b00020;
+	opacity: 1;
+}
+
+/* Focus visibility */
+.folder-gallery :focus-visible {
+	outline: 2px solid var(--fg-accent);
+	outline-offset: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.folder-gallery .fg-folders,
+	.folder-gallery .fg-grid {
+		grid-template-columns: repeat(min(var(--fg-cols), 3), 1fr);
+	}
+}
+
+@media (max-width: 480px) {
+	.folder-gallery .fg-folders {
+		grid-template-columns: 1fr;
+	}
+	.folder-gallery .fg-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+/* Lightbox */
+body.fg-lb-open {
+	overflow: hidden;
+}
+
+.fg-lightbox {
+	position: fixed;
+	inset: 0;
+	z-index: 99999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.9);
+	padding: 1rem;
+}
+
+.fg-lightbox[hidden] {
+	display: none;
+}
+
+.fg-lightbox .fg-lb-figure {
+	margin: 0;
+	max-width: 92vw;
+	max-height: 88vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.fg-lightbox .fg-lb-img {
+	max-width: 92vw;
+	max-height: 82vh;
+	object-fit: contain;
+	border-radius: 4px;
+}
+
+.fg-lightbox .fg-lb-caption {
+	color: #fff;
+	margin-top: 0.6rem;
+	font-size: 0.9rem;
+	opacity: 0.85;
+	text-align: center;
+	word-break: break-word;
+}
+
+.fg-lightbox .fg-lb-close,
+.fg-lightbox .fg-lb-nav {
+	position: absolute;
+	background: rgba(255, 255, 255, 0.12);
+	color: #fff;
+	border: 0;
+	cursor: pointer;
+	border-radius: 50%;
+	width: 48px;
+	height: 48px;
+	font-size: 1.6rem;
+	line-height: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.fg-lightbox .fg-lb-close:hover,
+.fg-lightbox .fg-lb-nav:hover {
+	background: rgba(255, 255, 255, 0.25);
+}
+
+.fg-lightbox .fg-lb-close {
+	top: 1rem;
+	right: 1rem;
+}
+
+.fg-lightbox .fg-lb-prev {
+	left: 1rem;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.fg-lightbox .fg-lb-next {
+	right: 1rem;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+@media (max-width: 480px) {
+	.fg-lightbox .fg-lb-prev { left: 0.4rem; }
+	.fg-lightbox .fg-lb-next { right: 0.4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.folder-gallery * {
+		transition: none !important;
+	}
+}

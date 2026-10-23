@@ -1,0 +1,81 @@
+/* mod_folder_gallery - UIkit 3 bridge - (C) Pixed - pixed.it */
+/* Minimal tweaks; layout/colours come from the theme's UIkit. */
+
+/* Folder button: full-width card, icon + left-aligned name + count. */
+.folder-gallery--uikit .fg-folders > div {
+	min-width: 0;
+	max-width: 100%;
+}
+
+.folder-gallery--uikit .fg-folder {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	width: 100%;
+	height: 100%;
+	white-space: normal;
+	text-align: left;
+}
+
+.folder-gallery--uikit .fg-folder-icon {
+	flex: 0 0 auto;
+	display: inline-flex;
+	opacity: 0.7;
+}
+
+.folder-gallery--uikit .fg-folder-name {
+	flex: 1 1 auto;
+	overflow-wrap: anywhere;
+	line-height: 1.3;
+}
+
+.folder-gallery--uikit .fg-folder-count {
+	flex: 0 0 auto;
+	opacity: 0.7;
+}
+
+/* Thumbnail: the clickable button is a bare, full-width square cell (uk-cover fills it). */
+.folder-gallery--uikit .fg-thumb {
+	display: block;
+	width: 100%;
+	padding: 0;
+	border: 0;
+	background: none;
+	cursor: pointer;
+}
+
+.folder-gallery--uikit .fg-thumb .uk-cover-container {
+	width: 100%;
+	border-radius: 4px;
+}
+
+/*
+ * The 1:1 <canvas> placeholder gives the container its responsive square height.
+ * It must be forced to full width (intrinsic size is 1px), otherwise the container
+ * collapses to a thin strip and uk-cover shows only a sliver of the image.
+ */
+.folder-gallery--uikit .fg-thumb .uk-cover-container > canvas {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+/* Back button + loading row spacing. */
+.folder-gallery--uikit .fg-back {
+	margin: 0.5rem 0;
+}
+
+.folder-gallery--uikit .fg-message--loading {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+/*
+ * The UIkit lightbox (appended to <body>, outside the module) defaults to z-index 1010,
+ * which sits below YOOtheme's sticky header — so the site menu shows through the overlay.
+ * Lift it above the header, matching the default skin's own lightbox (99999).
+ */
+.uk-lightbox {
+	z-index: 99999;
+}

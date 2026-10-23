@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" method="upgrade">
+	<name>MOD_FOLDER_GALLERY</name>
+	<author>Pixed</author>
+	<creationDate>2026-06</creationDate>
+	<copyright>(C) Pixed di Gianluca - pixed.it</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>info@pixed.it</authorEmail>
+	<authorUrl>https://pixed.it</authorUrl>
+	<version>1.1.0</version>
+	<description>MOD_FOLDER_GALLERY_XML_DESCRIPTION</description>
+
+	<namespace path="src">Pixed\Module\FolderGallery</namespace>
+
+	<files>
+		<folder module="mod_folder_gallery">services</folder>
+		<folder>language</folder>
+		<folder>src</folder>
+		<folder>tmpl</folder>
+	</files>
+
+	<media destination="mod_folder_gallery" folder="media">
+		<folder>css</folder>
+		<folder>js</folder>
+	</media>
+
+	<languages>
+		<language tag="en-GB">language/en-GB/mod_folder_gallery.ini</language>
+		<language tag="en-GB">language/en-GB/mod_folder_gallery.sys.ini</language>
+		<language tag="it-IT">language/it-IT/mod_folder_gallery.ini</language>
+		<language tag="it-IT">language/it-IT/mod_folder_gallery.sys.ini</language>
+	</languages>
+
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="base_folder"
+					type="text"
+					label="MOD_FOLDER_GALLERY_FIELD_BASE_FOLDER_LABEL"
+					description="MOD_FOLDER_GALLERY_FIELD_BASE_FOLDER_DESC"
+					default="images"
+					filter="path"
+				/>
+
+				<field
+					name="columns"
+					type="list"
+					label="MOD_FOLDER_GALLERY_FIELD_COLUMNS_LABEL"
+					description="MOD_FOLDER_GALLERY_FIELD_COLUMNS_DESC"
+					default="4"
+					validate="options">
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+				</field>
+
+				<field
+					name="framework"
+					type="radio"
+					layout="joomla.form.field.radio.switcher"
+					label="MOD_FOLDER_GALLERY_FIELD_FRAMEWORK_LABEL"
+					description="MOD_FOLDER_GALLERY_FIELD_FRAMEWORK_DESC"
+					default="default"
+					validate="options">
+					<option value="default">MOD_FOLDER_GALLERY_FRAMEWORK_DEFAULT</option>
+					<option value="uikit">MOD_FOLDER_GALLERY_FRAMEWORK_UIKIT</option>
+				</field>
+
+				<field
+					name="crop"
+					type="radio"
+					layout="joomla.form.field.radio.switcher"
+					label="MOD_FOLDER_GALLERY_FIELD_CROP_LABEL"
+					description="MOD_FOLDER_GALLERY_FIELD_CROP_DESC"
+					default="1"
+					validate="options">
+					<option value="1">MOD_FOLDER_GALLERY_CROP_COVER</option>
+					<option value="0">MOD_FOLDER_GALLERY_CROP_CONTAIN</option>
+				</field>
+
+				<field
+					name="thumb_width"
+					type="number"
+					label="MOD_FOLDER_GALLERY_FIELD_THUMB_W_LABEL"
+					description="MOD_FOLDER_GALLERY_FIELD_THUMB_W_DESC"
+					default="500"
+					min="32"
+					max="2000"
+				/>
+
+				<field
+					name="thumb_height"
+					type="number"
+					label="MOD_FOLDER_GALLERY_FIELD_THUMB_H_LABEL"
+					description="MOD_FOLDER_GALLERY_FIELD_THUMB_H_DESC"
+					default="500"
+					min="32"
+					max="2000"
+				/>
+
+				<field
+					name="per_page"
+					type="number"
+					label="MOD_FOLDER_GALLERY_FIELD_PER_PAGE_LABEL"
+					description="MOD_FOLDER_GALLERY_FIELD_PER_PAGE_DESC"
+					default="24"
+					min="1"
+					max="500"
+				/>
+
+				<field
+					name="show_counts"
+					type="radio"
+					layout="joomla.form.field.radio.switcher"
+					label="MOD_FOLDER_GALLERY_FIELD_SHOW_COUNTS_LABEL"
+					description="MOD_FOLDER_GALLERY_FIELD_SHOW_COUNTS_DESC"
+					default="0"
+					validate="options">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field
+					name="cache_dir"
+					type="text"
+					label="MOD_FOLDER_GALLERY_FIELD_CACHE_DIR_LABEL"
+					description="MOD_FOLDER_GALLERY_FIELD_CACHE_DIR_DESC"
+					default="images/cache_folder_gallery"
+					filter="path"
+				/>
+			</fieldset>
+
+			<fieldset name="advanced">
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					class="custom-select"
+				/>
+
+				<field
+					name="moduleclass_sfx"
+					type="textarea"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					rows="3"
+					validate="CssIdentifier"
+				/>
+
+				<field
+					name="module_tag"
+					type="list"
+					label="COM_MODULES_FIELD_MODULE_TAG_LABEL"
+					default="div"
+					validate="options">
+					<option value="div">div</option>
+					<option value="section">section</option>
+					<option value="aside">aside</option>
+				</field>
+
+				<field
+					name="bootstrap_size"
+					type="list"
+					label="COM_MODULES_FIELD_BOOTSTRAP_SIZE_LABEL"
+					default="0"
+					validate="options">
+					<option value="0">COM_MODULES_FIELD_VALUE_NONE</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="6">6</option>
+					<option value="12">12</option>
+				</field>
+
+				<field
+					name="header_tag"
+					type="list"
+					label="COM_MODULES_FIELD_MODULE_HEADER_TAG_LABEL"
+					default="h3"
+					validate="options">
+					<option value="h1">h1</option>
+					<option value="h2">h2</option>
+					<option value="h3">h3</option>
+					<option value="h4">h4</option>
+					<option value="h5">h5</option>
+					<option value="h6">h6</option>
+					<option value="p">p</option>
+				</field>
+
+				<field
+					name="header_class"
+					type="textarea"
+					label="COM_MODULES_FIELD_MODULE_HEADER_CLASS_LABEL"
+					rows="3"
+					validate="CssIdentifier"
+				/>
+
+				<field
+					name="cache"
+					type="list"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					default="0"
+					validate="options">
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+
+				<field
+					name="cache_time"
+					type="number"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					default="900"
+				/>
+
+				<field
+					name="cachemode"
+					type="hidden"
+					default="static">
+					<option value="static"></option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

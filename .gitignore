@@ -1,0 +1,11 @@
+# Local-only developer notes (kept out of the public repository)
+CLAUDE.md
+
+# Packaging artefacts
+*.zip
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
